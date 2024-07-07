@@ -1,12 +1,20 @@
 package ru.berdnikov.httploggerspringbootstarter;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import ru.berdnikov.httploggerspringbootstarter.aspect.LoggingHttpTrackTimeAspect;
+import ru.berdnikov.httploggerspringbootstarter.aspect.MetricsAspect;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogger;
+//import ru.berdnikov.httploggerspringbootstarter.aspect.MetricsAspect;
 
 @AutoConfiguration
+@RequiredArgsConstructor
 public class CosmoZooAutoConfiguration {
+    @Bean
+    public HttpLogger httpLogger() {
+        return new HttpLogger();
+    }
 
     @Bean
     public ComsoZoo comsoZoo() {
@@ -16,7 +24,7 @@ public class CosmoZooAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public LoggingHttpTrackTimeAspect LoggingTrackTimeAspect() {
-        return new LoggingHttpTrackTimeAspect();
+    public MetricsAspect LoggingTrackTimeAspect(HttpLogger httpLogger) {
+        return new MetricsAspect(httpLogger);
     }
 }
