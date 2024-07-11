@@ -30,20 +30,23 @@ public class LogAutoConfiguration {
 
     @Bean
     @ConditionalOnLog(LogType.FILTER)
-    public HttpLogFilterImpl logFilter() {
-        return new HttpLogFilterImpl(httpRequestAndResponseLogging(), httpTimingLogging());
+    public HttpLogFilterImpl logFilter(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
+                                       HttpExecutionTimingLogging httpExecutionTimingLogging) {
+        return new HttpLogFilterImpl(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
     }
 
     @Bean
     @ConditionalOnLog(LogType.INTERCEPTOR)
-    public HttpHandlerInterceptor requestInterceptor() {
-        return new HttpHandlerInterceptor(httpRequestAndResponseLogging(), httpTimingLogging());
+    public HttpHandlerInterceptor requestInterceptor(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
+                                                     HttpExecutionTimingLogging httpExecutionTimingLogging) {
+        return new HttpHandlerInterceptor(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
     }
 
     @Bean
     @ConditionalOnLog(LogType.ASPECT)
-    public LogHttpAspect metricsAspect() {
-        return new LogHttpAspect(httpRequestAndResponseLogging(), httpTimingLogging());
+    public LogHttpAspect metricsAspect(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
+                                       HttpExecutionTimingLogging httpExecutionTimingLogging) {
+        return new LogHttpAspect(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
     }
 
     @Bean

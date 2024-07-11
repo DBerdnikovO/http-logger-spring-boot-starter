@@ -11,7 +11,6 @@ import ru.berdnikov.httploggerspringbootstarter.utils.HttpHeaderAttribute;
  * @project http-logger-spring-boot-starter
  */
 @Slf4j
-@Component
 public class HttpExecutionTimingLogging implements HttpExecutionTiming {
     @Override
     public void measureExecutionTime(StopWatch stopWatch) {

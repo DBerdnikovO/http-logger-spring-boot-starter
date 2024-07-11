@@ -22,7 +22,6 @@ import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 //+
 @Aspect
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class LogHttpAspect {
     private final HttpLogDetails httpRequestAndResponseLogging;

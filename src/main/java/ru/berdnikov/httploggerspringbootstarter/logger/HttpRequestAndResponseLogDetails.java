@@ -14,7 +14,6 @@ import java.util.Enumeration;
  * @project http-logger-spring-boot-starter
  */
 @Slf4j
-@Component
 public class HttpRequestAndResponseLogDetails implements HttpLogDetails {
     @Override
     public void logRequestAndResponseDetails(ServletRequest request, ServletResponse response) {
