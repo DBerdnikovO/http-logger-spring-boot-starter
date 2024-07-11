@@ -4,10 +4,10 @@ import jakarta.servlet.ServletRequest;
 import org.springframework.util.StopWatch;
 
 /**
- * @author danilaberdnikov on HttpTiming.
+ * @author danilaberdnikov on HttpExecutionTiming.
  * @project http-logger-spring-boot-starter
  */
-public interface HttpTiming {
+public interface HttpExecutionTiming {
     void measureExecutionTime(StopWatch stopWatch);
 
     void measureExecutionTime(ServletRequest request);

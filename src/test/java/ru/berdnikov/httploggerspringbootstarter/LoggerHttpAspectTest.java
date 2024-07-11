@@ -8,8 +8,8 @@
 //import org.mockito.InjectMocks;
 //import org.mockito.Mock;
 //import org.mockito.MockitoAnnotations;
-//import ru.berdnikov.httploggerspringbootstarter.aspect.LoggerHttpAspect;
-//import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogger;
+//import ru.berdnikov.httploggerspringbootstarter.aspect.LogHttpAspect;
+//import ru.berdnikov.httploggerspringbootstarter.logger.HttpRequestAndResponseLogDetails;
 //
 //import static org.mockito.Mockito.*;
 //
@@ -19,13 +19,13 @@
 // */
 //public class LoggerHttpAspectTest {
 //    @Mock
-//    private HttpLogger mockHttpLogger;
+//    private HttpRequestAndResponseLogDetails mockHttpLogger;
 //
 //    @Mock
 //    private ProceedingJoinPoint mockJoinPoint;
 //
 //    @InjectMocks
-//    private LoggerHttpAspect loggerHttpAspect;
+//    private LogHttpAspect loggerHttpAspect;
 //
 //    @BeforeEach
 //    public void setUp() {

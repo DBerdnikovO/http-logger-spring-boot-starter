@@ -8,23 +8,26 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 import ru.berdnikov.httploggerspringbootstarter.exception.HttpFilterException;
-import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogger;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTiming;
 
 /**
- * @author danilaberdnikov on HttpFilter.
+ * @author danilaberdnikov on HttpLogFilterImpl.
  * @project http-logger-spring-boot-starter
  */
+//+
 @Slf4j
 @RequiredArgsConstructor
-public class HttpFilter implements Filter {
-    private final HttpLogger httpLogger;
+public class HttpLogFilterImpl implements Filter {
+    private final HttpLogDetails httpRequestAndResponseLogging;
+    private final HttpExecutionTiming httpExecutionTimingLogging;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
         log.info("------Filter logging enable------");
+        log.info("Filter logs before (chain.doFilter()) starts");
 
-        httpLogger.logRequestDetails(request);
-        httpLogger.logResponseDetails(response);
+        httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -33,7 +36,11 @@ public class HttpFilter implements Filter {
         } catch (Throwable e) {
             throw new HttpFilterException(e);
         } finally {
-            httpLogger.measureExecutionTime(stopWatch);
+            log.info("Filter logs after (chain.doFilter()) starts");
+
+            httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+
+            httpExecutionTimingLogging.measureExecutionTime(stopWatch);
         }
     }
 }

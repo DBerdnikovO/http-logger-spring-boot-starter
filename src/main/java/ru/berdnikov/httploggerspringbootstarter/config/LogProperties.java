@@ -4,12 +4,12 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author danilaberdnikov on LoggerProperties.
+ * @author danilaberdnikov on LogApplicationVariables.
  * @project http-logger-spring-boot-starter
  */
 @Data
 @ConfigurationProperties(prefix = "logger")
-public class LoggerProperties {
+public class LogProperties {
     private Boolean enabled;
     private String type;
     private String level;

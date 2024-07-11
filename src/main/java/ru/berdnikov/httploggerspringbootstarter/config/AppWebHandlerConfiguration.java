@@ -6,11 +6,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.berdnikov.httploggerspringbootstarter.interceptor.HttpHandlerInterceptor;
 
 /**
- * @author danilaberdnikov on AppWebConfiguration.
+ * @author danilaberdnikov on AppWebHandlerConfiguration.
  * @project http-logger-spring-boot-starter
  */
 @RequiredArgsConstructor
-public class AppWebConfiguration implements WebMvcConfigurer {
+public class AppWebHandlerConfiguration implements WebMvcConfigurer {
     private final HttpHandlerInterceptor httpHandlerInterceptor;
 
     @Override

@@ -6,36 +6,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
-import ru.berdnikov.httploggerspringbootstarter.utils.EnvironmentValues;
 
 import java.util.Enumeration;
 
 /**
- * @author danilaberdnikov on HttpLogger.
+ * @author danilaberdnikov on HttpRequestAndResponseLogDetails.
  * @project http-logger-spring-boot-starter
  */
 @Slf4j
 @Component
-public class HttpLogger implements HttpLogging, HttpTiming {
+public class HttpRequestAndResponseLogDetails implements HttpLogDetails {
     @Override
-    public void measureExecutionTime(StopWatch stopWatch) {
-        stopWatch.stop();
-        long executionTime = stopWatch.getTotalTimeMillis();
-        log.info("Execute with time: {} ", executionTime);
-    }
-
-    @Override
-    public void measureExecutionTime(ServletRequest request) {
-        long startTime = (Long) request.getAttribute(EnvironmentValues.START_TIME_ATTRIBUTE);
-        long endTime = System.currentTimeMillis();
-        long executionTime = endTime - startTime;
-        log.info("Execute with time: {} ms", executionTime);
-    }
-
-    @Override
-    public void measureExecutionTime(long timeMils) {
-        log.info("Execute with time: {} ms", timeMils);
+    public void logRequestAndResponseDetails(ServletRequest request, ServletResponse response) {
+        logRequestDetails(request);
+        logResponseDetails(response);
     }
 
     @Override

@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -12,21 +11,22 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import ru.berdnikov.httploggerspringbootstarter.exception.LoggerAspectException;
-import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogger;
-
-import java.util.Arrays;
+import ru.berdnikov.httploggerspringbootstarter.exception.LogAspectException;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTiming;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 
 /**
- * @author danilaberdnikov on LoggerHttpAspect.
+ * @author danilaberdnikov on LogHttpAspect.
  * @project http-logger-spring-boot-starter
  */
+//+
 @Aspect
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class LoggerHttpAspect {
-    private final HttpLogger httpLogger;
+public class LogHttpAspect {
+    private final HttpLogDetails httpRequestAndResponseLogging;
+    private final HttpExecutionTiming httpExecutionTimingLogging;
 
     @Pointcut("within(@org.springframework.stereotype.Controller *) || " +
             "within(@org.springframework.web.bind.annotation.RestController *)")
@@ -40,8 +40,9 @@ public class LoggerHttpAspect {
     public void requestMappingMethods() {}
 
     @Around("controllerClasses() && requestMappingMethods()")
-    public Object logAround(ProceedingJoinPoint joinPoint) {
+    public Object logRequestAndResponseAround(ProceedingJoinPoint joinPoint) {
         log.info("------Aspect logging enabled------");
+        log.info("Aspect logs before (joinPoint.proceed()) starts");
 
         logRequestAndResponse();
 
@@ -50,10 +51,12 @@ public class LoggerHttpAspect {
         try {
             return joinPoint.proceed();
         } catch (Throwable e) {
-            throw new LoggerAspectException(e);
+            throw new LogAspectException(e);
         } finally {
             stopWatch.stop();
-            httpLogger.measureExecutionTime(stopWatch.getTotalTimeMillis());
+            log.info("Aspect logs after (joinPoint.proceed()) starts");
+            logRequestAndResponse();
+            httpExecutionTimingLogging.measureExecutionTime(stopWatch.getTotalTimeMillis());
         }
     }
 
@@ -62,8 +65,7 @@ public class LoggerHttpAspect {
         if (requestAttributes instanceof ServletRequestAttributes servletRequestAttributes) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
             HttpServletResponse response = servletRequestAttributes.getResponse();
-            httpLogger.logRequestDetails(request);
-            httpLogger.logResponseDetails(response);
+            httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
         }
     }
 }

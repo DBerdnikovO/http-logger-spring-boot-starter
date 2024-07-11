@@ -5,10 +5,11 @@ import org.springframework.context.annotation.ConditionContext;
 import java.util.Optional;
 
 /**
- * @author danilaberdnikov on LoggerPropertiesUtils.
+ * @author danilaberdnikov on LogPropertiesUtils.
  * @project http-logger-spring-boot-starter
  */
-public class LoggerPropertiesUtils {
+//+
+public class LogPropertiesUtils {
     public static boolean isLoggerEnabled(ConditionContext context) {
         return Optional.ofNullable(context.getEnvironment().getProperty("logger.enabled")).isPresent();
     }

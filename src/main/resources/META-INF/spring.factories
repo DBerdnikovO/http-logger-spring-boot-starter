@@ -1,5 +1,5 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  ru.berdnikov.httploggerspringbootstarter.init.LoggerEnvironmentPostProcessor
+  ru.berdnikov.httploggerspringbootstarter.init.LogEnvironmentPostProcessor
 
 org.springframework.boot.diagnostics.AbstractFailureAnalyzer=\
-  ru.berdnikov.httploggerspringbootstarter.init.LoggerFailureAnalyzer
+  ru.berdnikov.httploggerspringbootstarter.init.LogFailureAnalyzer
