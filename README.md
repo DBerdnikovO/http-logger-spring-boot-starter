@@ -18,9 +18,10 @@
         </dependency>
      ```
 
-* Добавьте свойство в файл:
+* Добавьте свойства в файл:
     ```properties
     logger.enabled = true
+    logger.type = aspect
     ```
 
 * Запустите приложение и увидите логирование всех http запросов и ответов.
@@ -29,7 +30,6 @@
 
 * Настраиваемые свойства 
     ```properties
-    logger.type =
     logger.level-src =
     logger.level =
     logger.format =

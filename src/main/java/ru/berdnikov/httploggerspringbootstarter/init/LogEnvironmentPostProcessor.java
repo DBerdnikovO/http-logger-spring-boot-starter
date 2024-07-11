@@ -40,6 +40,8 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
         if (levelPropertyExistLogType(levelProperty)) {
             logProperties.put(levelSrcProperty.orElse(LoggingParameters.LOGGING_LEVEL_ROOT), levelProperty.get());
+        } else {
+            logProperties.put(levelSrcProperty.orElse(LoggingParameters.LOGGING_LEVEL_ROOT), "INFO");
         }
 
         formatProperty.ifPresent(format -> logProperties.put(LoggingParameters.LOGGING_PATTERN, formatProperty.get()));

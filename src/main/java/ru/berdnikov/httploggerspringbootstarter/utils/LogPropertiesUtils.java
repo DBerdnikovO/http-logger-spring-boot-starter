@@ -1,6 +1,7 @@
 package ru.berdnikov.httploggerspringbootstarter.utils;
 
 import org.springframework.context.annotation.ConditionContext;
+import ru.berdnikov.httploggerspringbootstarter.logger.LogType;
 
 import java.util.Optional;
 
@@ -16,16 +17,16 @@ public class LogPropertiesUtils {
 
     public static boolean isAspectLoggingEnabled(ConditionContext context) {
         String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
-        return "aspect".equals(type);
+        return LogType.ASPECT.name().equalsIgnoreCase(type);
     }
 
     public static boolean isFilterLoggingEnabled(ConditionContext context) {
         String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
-        return "filter".equals(type);
+        return LogType.FILTER.name().equalsIgnoreCase(type);
     }
 
     public static boolean isInterceptorLoggingEnabled(ConditionContext context) {
         String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
-        return "interceptor".equals(type);
+        return LogType.INTERCEPTOR.name().equalsIgnoreCase(type);
     }
 }
