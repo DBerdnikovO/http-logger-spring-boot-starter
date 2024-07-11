@@ -26,10 +26,37 @@
 
 * Запустите приложение и увидите логирование всех http запросов и ответов.
 
+* Пример вывода логов
+```
+------Aspect logging enabled------
+Aspect logs before (joinPoint.proceed()) starts
+------HTTP Request logging start------
+METHOD type: GET
+Request URI: /drink
+Servlet PATH: /drink
+Request Header: host = localhost:8080
+------HTTP Request logging stop------
+------HTTP Response logging start------
+Response Status: 200
+------HTTP Response logging stop------
+Aspect logs after (joinPoint.proceed()) starts
+------HTTP Request logging start------
+METHOD type: GET
+Request URI: /drink
+Servlet PATH: /drink
+Request Header: host = localhost:8080
+Request Header: sec-fetch-site = same-origin
+------HTTP Request logging stop------
+------HTTP Response logging start------
+Response Status: 200
+------HTTP Response logging stop------
+Execute with time in ms: 44 
+```
 ## Документация
 
 * Настраиваемые свойства 
     ```properties
+    logger.type =
     logger.level-src =
     logger.level =
     logger.format =
