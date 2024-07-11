@@ -5,6 +5,6 @@ package ru.berdnikov.httploggerspringbootstarter.utils;
  * @project http-logger-spring-boot-starter
  */
 public class HttpHeaderAttribute {
-    public static final String START_TIME_ATTRIBUTE = "startTime";
+    public static final String START_TIME_HEADER_ATTRIBUTE = "startTime";
 }
 

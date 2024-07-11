@@ -2,7 +2,6 @@ package ru.berdnikov.httploggerspringbootstarter.logger;
 
 import jakarta.servlet.ServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import ru.berdnikov.httploggerspringbootstarter.utils.HttpHeaderAttribute;
 
@@ -21,7 +20,7 @@ public class HttpExecutionTimingLogging implements HttpExecutionTiming {
 
     @Override
     public void measureExecutionTime(ServletRequest request) {
-        long startTime = (Long) request.getAttribute(HttpHeaderAttribute.START_TIME_ATTRIBUTE);
+        long startTime = (Long) request.getAttribute(HttpHeaderAttribute.START_TIME_HEADER_ATTRIBUTE);
         long endTime = System.currentTimeMillis();
         long executionTime = endTime - startTime;
         log.info("Execute with time in ms: {} ", executionTime);

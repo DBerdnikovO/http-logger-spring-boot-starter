@@ -6,6 +6,8 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.stereotype.Component;
 import ru.berdnikov.httploggerspringbootstarter.exception.LogStartupException;
+import ru.berdnikov.httploggerspringbootstarter.logger.LogLevel;
+import ru.berdnikov.httploggerspringbootstarter.logger.LogType;
 import ru.berdnikov.httploggerspringbootstarter.utils.LogApplicationVariables;
 import ru.berdnikov.httploggerspringbootstarter.utils.LoggingParameters;
 
@@ -37,10 +39,25 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
         Map<String, Object> logProperties = new HashMap<>();
 
-        levelProperty.ifPresent(s -> logProperties.put(levelSrcProperty.orElse(LoggingParameters.LOGGING_LEVEL_ROOT), s));
-        formatProperty.ifPresent(p -> logProperties.put(LoggingParameters.LOGGING_PATTERN, formatProperty.get()));
+        if(levelPropertyExistLogType(levelProperty)) {
+            logProperties.put(levelSrcProperty.orElse(LoggingParameters.LOGGING_LEVEL_ROOT), levelProperty.get());
+        }
+
+        formatProperty.ifPresent(format -> logProperties.put(LoggingParameters.LOGGING_PATTERN, formatProperty.get()));
 
         MapPropertySource propertySource = new MapPropertySource(CUSTOM_PROPERTY_NAME, logProperties);
         environment.getPropertySources().addLast(propertySource);
+    }
+
+    private boolean levelPropertyExistLogType(Optional<String> level) {
+        if(level.isPresent()) {
+            for (LogLevel logLevel : LogLevel.values()) {
+                if (logLevel.name().equalsIgnoreCase(level.get())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 }

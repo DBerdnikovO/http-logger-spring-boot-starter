@@ -29,7 +29,7 @@ public class HttpHandlerInterceptor implements HandlerInterceptor {
         httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
 
         long startTime = System.currentTimeMillis();
-        request.setAttribute(HttpHeaderAttribute.START_TIME_ATTRIBUTE, startTime);
+        request.setAttribute(HttpHeaderAttribute.START_TIME_HEADER_ATTRIBUTE, startTime);
         return true;
     }
 
