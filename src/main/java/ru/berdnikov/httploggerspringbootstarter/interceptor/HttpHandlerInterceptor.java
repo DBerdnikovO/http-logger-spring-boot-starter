@@ -5,8 +5,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
-import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTiming;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 import ru.berdnikov.httploggerspringbootstarter.utils.HttpHeaderAttribute;
 
 
@@ -26,7 +26,7 @@ public class HttpHandlerInterceptor implements HandlerInterceptor {
         log.info("------Interceptor logging enable------");
         log.info("Interceptor logs before request,response");
 
-        httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+        httpRequestAndResponseLogging.logRequestAndResponseDetails(request, response);
 
         long startTime = System.currentTimeMillis();
         request.setAttribute(HttpHeaderAttribute.START_TIME_HEADER_ATTRIBUTE, startTime);
@@ -37,7 +37,7 @@ public class HttpHandlerInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         log.info("Interceptor logs after request,response");
 
-        httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+        httpRequestAndResponseLogging.logRequestAndResponseDetails(request, response);
 
         httpExecutionTimingLogging.measureExecutionTime(request);
     }

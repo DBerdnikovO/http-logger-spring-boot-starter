@@ -7,7 +7,6 @@ import org.springframework.core.env.MapPropertySource;
 import org.springframework.stereotype.Component;
 import ru.berdnikov.httploggerspringbootstarter.exception.LogStartupException;
 import ru.berdnikov.httploggerspringbootstarter.logger.LogLevel;
-import ru.berdnikov.httploggerspringbootstarter.logger.LogType;
 import ru.berdnikov.httploggerspringbootstarter.utils.LogApplicationVariables;
 import ru.berdnikov.httploggerspringbootstarter.utils.LoggingParameters;
 
@@ -39,7 +38,7 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
         Map<String, Object> logProperties = new HashMap<>();
 
-        if(levelPropertyExistLogType(levelProperty)) {
+        if (levelPropertyExistLogType(levelProperty)) {
             logProperties.put(levelSrcProperty.orElse(LoggingParameters.LOGGING_LEVEL_ROOT), levelProperty.get());
         }
 
@@ -50,7 +49,7 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
     }
 
     private boolean levelPropertyExistLogType(Optional<String> level) {
-        if(level.isPresent()) {
+        if (level.isPresent()) {
             for (LogLevel logLevel : LogLevel.values()) {
                 if (logLevel.name().equalsIgnoreCase(level.get())) {
                     return true;

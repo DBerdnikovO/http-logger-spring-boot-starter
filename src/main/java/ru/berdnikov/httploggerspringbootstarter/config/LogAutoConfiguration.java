@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import ru.berdnikov.httploggerspringbootstarter.aspect.LogHttpAspect;
 import ru.berdnikov.httploggerspringbootstarter.condition.ConditionalOnLog;
-import ru.berdnikov.httploggerspringbootstarter.filter.*;
+import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilterImpl;
 import ru.berdnikov.httploggerspringbootstarter.interceptor.HttpHandlerInterceptor;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTimingLogging;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpRequestAndResponseLogDetails;

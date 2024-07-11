@@ -11,21 +11,21 @@ import java.util.Optional;
 //+
 public class LogPropertiesUtils {
     public static boolean isLoggerEnabled(ConditionContext context) {
-        return Optional.ofNullable(context.getEnvironment().getProperty("logger.enabled")).isPresent();
+        return Optional.ofNullable(context.getEnvironment().getProperty(LogApplicationVariables.ENABLED)).isPresent();
     }
 
     public static boolean isAspectLoggingEnabled(ConditionContext context) {
-        String type = context.getEnvironment().getProperty("logger.type");
+        String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
         return "aspect".equals(type);
     }
 
     public static boolean isFilterLoggingEnabled(ConditionContext context) {
-        String type = context.getEnvironment().getProperty("logger.type");
+        String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
         return "filter".equals(type);
     }
 
     public static boolean isInterceptorLoggingEnabled(ConditionContext context) {
-        String type = context.getEnvironment().getProperty("logger.type");
+        String type = context.getEnvironment().getProperty(LogApplicationVariables.TYPE);
         return "interceptor".equals(type);
     }
 }

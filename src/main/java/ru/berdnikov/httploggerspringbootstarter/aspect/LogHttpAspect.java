@@ -5,8 +5,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,14 +30,16 @@ public class LogHttpAspect {
 
     @Pointcut("within(@org.springframework.stereotype.Controller *) || " +
             "within(@org.springframework.web.bind.annotation.RestController *)")
-    public void controllerClasses() {}
+    public void controllerClasses() {
+    }
 
     @Pointcut("execution(@(org.springframework.web.bind.annotation.RequestMapping || " +
             "org.springframework.web.bind.annotation.GetMapping || " +
             "org.springframework.web.bind.annotation.PostMapping || " +
             "org.springframework.web.bind.annotation.PutMapping || " +
             "org.springframework.web.bind.annotation.DeleteMapping) * *(..))")
-    public void requestMappingMethods() {}
+    public void requestMappingMethods() {
+    }
 
     @Around("controllerClasses() && requestMappingMethods()")
     public Object logRequestAndResponseAround(ProceedingJoinPoint joinPoint) {
@@ -64,7 +67,7 @@ public class LogHttpAspect {
         if (requestAttributes instanceof ServletRequestAttributes servletRequestAttributes) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
             HttpServletResponse response = servletRequestAttributes.getResponse();
-            httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+            httpRequestAndResponseLogging.logRequestAndResponseDetails(request, response);
         }
     }
 }

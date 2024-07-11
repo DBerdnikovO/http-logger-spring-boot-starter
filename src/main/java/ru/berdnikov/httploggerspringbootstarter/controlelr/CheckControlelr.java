@@ -1,6 +1,5 @@
 package ru.berdnikov.httploggerspringbootstarter.controlelr;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,5 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class CheckControlelr {
     @GetMapping
-    public String check() {return "HELLO";}
+    public String check() {
+        return "HELLO";
+    }
 }

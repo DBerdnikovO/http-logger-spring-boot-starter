@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 import ru.berdnikov.httploggerspringbootstarter.exception.HttpFilterException;
-import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTiming;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 
 /**
  * @author danilaberdnikov on HttpLogFilterImpl.
@@ -27,7 +27,7 @@ public class HttpLogFilterImpl implements Filter {
         log.info("------Filter logging enable------");
         log.info("Filter logs before (chain.doFilter()) starts");
 
-        httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+        httpRequestAndResponseLogging.logRequestAndResponseDetails(request, response);
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -38,7 +38,7 @@ public class HttpLogFilterImpl implements Filter {
         } finally {
             log.info("Filter logs after (chain.doFilter()) starts");
 
-            httpRequestAndResponseLogging.logRequestAndResponseDetails(request,response);
+            httpRequestAndResponseLogging.logRequestAndResponseDetails(request, response);
 
             httpExecutionTimingLogging.measureExecutionTime(stopWatch);
         }
