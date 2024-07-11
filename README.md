@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # http-logger-spring-boot-starter
 
 Автоматическая настройка логирования http ответов и запросов для Spring Boot.
@@ -48,3 +49,6 @@
 * logger.level Предоставляет возможность указать тип уровня для логировнаия: FATAL, ERROR, WARN, INFO, DEBUG, TRACE. По умолчанию: INFO.
 
 * logger.format Предоставляет возможность написать формат вывода логов, по умолчанию не задан.
+=======
+
+>>>>>>> origin/master
