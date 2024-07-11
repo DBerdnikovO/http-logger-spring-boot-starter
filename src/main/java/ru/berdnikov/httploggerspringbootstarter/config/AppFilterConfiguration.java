@@ -3,7 +3,7 @@ package ru.berdnikov.httploggerspringbootstarter.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilterImpl;
+import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilter;
 
 /**
  * @author danilaberdnikov on AppFilterConfiguration.
@@ -11,13 +11,13 @@ import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilterImpl;
  */
 @RequiredArgsConstructor
 public class AppFilterConfiguration {
-    private final HttpLogFilterImpl httpLogFilterImpl;
+    private final HttpLogFilter httpLogFilter;
 
     @Bean
-    public FilterRegistrationBean<HttpLogFilterImpl> loggingFilter() {
-        FilterRegistrationBean<HttpLogFilterImpl> registrationBean = new FilterRegistrationBean<>();
+    public FilterRegistrationBean<HttpLogFilter> loggingFilter() {
+        FilterRegistrationBean<HttpLogFilter> registrationBean = new FilterRegistrationBean<>();
 
-        registrationBean.setFilter(httpLogFilterImpl);
+        registrationBean.setFilter(httpLogFilter);
         registrationBean.addUrlPatterns("/*");
 
         return registrationBean;

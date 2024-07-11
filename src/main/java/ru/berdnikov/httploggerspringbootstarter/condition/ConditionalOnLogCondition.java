@@ -12,7 +12,6 @@ import java.util.Map;
  * @author danilaberdnikov on ConditionalOnLogCondition.
  * @project http-logger-spring-boot-starter
  */
-//+
 public class ConditionalOnLogCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {

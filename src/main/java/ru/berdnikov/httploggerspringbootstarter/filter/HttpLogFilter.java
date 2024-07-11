@@ -12,13 +12,13 @@ import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTiming;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
 
 /**
- * @author danilaberdnikov on HttpLogFilterImpl.
+ * @author danilaberdnikov on HttpLogFilter.
  * @project http-logger-spring-boot-starter
  */
 //+
 @Slf4j
 @RequiredArgsConstructor
-public class HttpLogFilterImpl implements Filter {
+public class HttpLogFilter implements Filter {
     private final HttpLogDetails httpRequestAndResponseLogging;
     private final HttpExecutionTiming httpExecutionTimingLogging;
 

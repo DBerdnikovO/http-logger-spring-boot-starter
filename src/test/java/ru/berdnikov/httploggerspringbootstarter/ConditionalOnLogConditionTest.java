@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
  * @project http-logger-spring-boot-starter
  */
 public class ConditionalOnLogConditionTest {
-
     @Mock
     private ConditionContext mockContext;
 

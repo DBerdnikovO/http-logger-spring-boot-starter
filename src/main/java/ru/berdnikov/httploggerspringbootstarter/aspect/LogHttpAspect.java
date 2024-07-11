@@ -20,7 +20,6 @@ import ru.berdnikov.httploggerspringbootstarter.logger.HttpLogDetails;
  * @author danilaberdnikov on LogHttpAspect.
  * @project http-logger-spring-boot-starter
  */
-//+
 @Aspect
 @Slf4j
 @RequiredArgsConstructor

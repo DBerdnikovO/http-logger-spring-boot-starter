@@ -7,9 +7,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import ru.berdnikov.httploggerspringbootstarter.aspect.LogHttpAspect;
 import ru.berdnikov.httploggerspringbootstarter.condition.ConditionalOnLog;
-import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilterImpl;
+import ru.berdnikov.httploggerspringbootstarter.filter.HttpLogFilter;
 import ru.berdnikov.httploggerspringbootstarter.interceptor.HttpHandlerInterceptor;
-import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTimingLogging;
+import ru.berdnikov.httploggerspringbootstarter.logger.HttpExecutionTimeLogging;
 import ru.berdnikov.httploggerspringbootstarter.logger.HttpRequestAndResponseLogDetails;
 import ru.berdnikov.httploggerspringbootstarter.logger.LogType;
 
@@ -24,35 +24,35 @@ public class LogAutoConfiguration {
     }
 
     @Bean
-    public HttpExecutionTimingLogging httpTimingLogging() {
-        return new HttpExecutionTimingLogging();
+    public HttpExecutionTimeLogging httpTimingLogging() {
+        return new HttpExecutionTimeLogging();
     }
 
     @Bean
     @ConditionalOnLog(LogType.FILTER)
-    public HttpLogFilterImpl logFilter(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
-                                       HttpExecutionTimingLogging httpExecutionTimingLogging) {
-        return new HttpLogFilterImpl(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
+    public HttpLogFilter logFilter(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
+                                   HttpExecutionTimeLogging httpExecutionTimeLogging) {
+        return new HttpLogFilter(httpRequestAndResponseLogDetails, httpExecutionTimeLogging);
     }
 
     @Bean
     @ConditionalOnLog(LogType.INTERCEPTOR)
     public HttpHandlerInterceptor requestInterceptor(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
-                                                     HttpExecutionTimingLogging httpExecutionTimingLogging) {
-        return new HttpHandlerInterceptor(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
+                                                     HttpExecutionTimeLogging httpExecutionTimeLogging) {
+        return new HttpHandlerInterceptor(httpRequestAndResponseLogDetails, httpExecutionTimeLogging);
     }
 
     @Bean
     @ConditionalOnLog(LogType.ASPECT)
     public LogHttpAspect metricsAspect(HttpRequestAndResponseLogDetails httpRequestAndResponseLogDetails,
-                                       HttpExecutionTimingLogging httpExecutionTimingLogging) {
-        return new LogHttpAspect(httpRequestAndResponseLogDetails, httpExecutionTimingLogging);
+                                       HttpExecutionTimeLogging httpExecutionTimeLogging) {
+        return new LogHttpAspect(httpRequestAndResponseLogDetails, httpExecutionTimeLogging);
     }
 
     @Bean
     @ConditionalOnLog(LogType.FILTER)
-    public AppFilterConfiguration filterConfig(HttpLogFilterImpl httpLogFilterImpl) {
-        return new AppFilterConfiguration(httpLogFilterImpl);
+    public AppFilterConfiguration filterConfig(HttpLogFilter httpLogFilter) {
+        return new AppFilterConfiguration(httpLogFilter);
     }
 
     @Bean

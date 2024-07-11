@@ -6,11 +6,11 @@ import org.springframework.util.StopWatch;
 import ru.berdnikov.httploggerspringbootstarter.utils.HttpHeaderAttribute;
 
 /**
- * @author danilaberdnikov on HttpExecutionTimingLogging.
+ * @author danilaberdnikov on HttpExecutionTimeLogging.
  * @project http-logger-spring-boot-starter
  */
 @Slf4j
-public class HttpExecutionTimingLogging implements HttpExecutionTiming {
+public class HttpExecutionTimeLogging implements HttpExecutionTiming {
     @Override
     public void measureExecutionTime(StopWatch stopWatch) {
         stopWatch.stop();

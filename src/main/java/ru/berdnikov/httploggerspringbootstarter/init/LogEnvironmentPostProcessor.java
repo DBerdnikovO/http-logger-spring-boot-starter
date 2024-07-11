@@ -21,7 +21,7 @@ import java.util.Optional;
 //+
 @Component
 public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
-    private final static String CUSTOM_PROPERTY_NAME = "customLogProperties";
+    public static final String CUSTOM_PROPERTY_NAME = "customLogProperties";
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -50,7 +50,7 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
         environment.getPropertySources().addLast(propertySource);
     }
 
-    private boolean levelPropertyExistLogType(Optional<String> level) {
+    public boolean levelPropertyExistLogType(Optional<String> level) {
         if (level.isPresent()) {
             for (LogLevel logLevel : LogLevel.values()) {
                 if (logLevel.name().equalsIgnoreCase(level.get())) {
