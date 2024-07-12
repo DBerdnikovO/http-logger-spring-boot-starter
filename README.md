@@ -9,7 +9,7 @@
 ## Быстрая настройка
 * Скачайте проект 
 ```
-  https://github.com/DBerdnikovO/http-logger-spring-boot-starter.git
+  git clone https://github.com/DBerdnikovO/http-logger-spring-boot-starter.git
 ```
 
 * Выполните команду
