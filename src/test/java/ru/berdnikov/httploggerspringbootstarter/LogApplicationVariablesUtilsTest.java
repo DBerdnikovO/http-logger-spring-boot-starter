@@ -1,5 +1,6 @@
 package ru.berdnikov.httploggerspringbootstarter;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -8,6 +9,8 @@ import org.springframework.core.env.Environment;
 import ru.berdnikov.httploggerspringbootstarter.utils.LogPropertiesUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
@@ -21,91 +24,88 @@ public class LogApplicationVariablesUtilsTest {
     @Mock
     private Environment mockEnvironment;
 
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
     void testIsLoggerEnabled_WhenPropertyExists() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.enabled")).thenReturn("true");
 
         boolean result = LogPropertiesUtils.isLoggerEnabled(mockContext);
 
-        assertThat(result).isTrue();
+        assertTrue(result);
     }
 
     @Test
     void testIsLoggerEnabled_WhenPropertyDoesNotExist() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.enabled")).thenReturn(null);
 
         boolean result = LogPropertiesUtils.isLoggerEnabled(mockContext);
 
-        assertThat(result).isFalse();
+        assertFalse(result);
     }
 
     @Test
     void testIsAspectLoggingEnabled_WhenTypeIsAspect() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("aspect");
 
         boolean result = LogPropertiesUtils.isAspectLoggingEnabled(mockContext);
 
-        assertThat(result).isTrue();
+        assertTrue(result);
     }
 
     @Test
     void testIsAspectLoggingEnabled_WhenTypeIsNotAspect() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("filter");
 
         boolean result = LogPropertiesUtils.isAspectLoggingEnabled(mockContext);
 
-        assertThat(result).isFalse();
+        assertFalse(result);
     }
 
     @Test
     void testIsFilterLoggingEnabled_WhenTypeIsFilter() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("filter");
 
         boolean result = LogPropertiesUtils.isFilterLoggingEnabled(mockContext);
 
-        assertThat(result).isTrue();
+        assertTrue(result);
     }
 
     @Test
     void testIsFilterLoggingEnabled_WhenTypeIsNotFilter() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("aspect");
 
         boolean result = LogPropertiesUtils.isFilterLoggingEnabled(mockContext);
 
-        assertThat(result).isFalse();
+        assertFalse(result);
     }
 
     @Test
     void testIsInterceptorLoggingEnabled_WhenTypeIsInterceptor() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("interceptor");
 
         boolean result = LogPropertiesUtils.isInterceptorLoggingEnabled(mockContext);
 
-        assertThat(result).isTrue();
+        assertTrue(result);
     }
 
     @Test
     void testIsInterceptorLoggingEnabled_WhenTypeIsNotInterceptor() {
-        MockitoAnnotations.openMocks(this);
         when(mockContext.getEnvironment()).thenReturn(mockEnvironment);
         when(mockEnvironment.getProperty("logger.type")).thenReturn("aspect");
 
         boolean result = LogPropertiesUtils.isInterceptorLoggingEnabled(mockContext);
 
-        assertThat(result).isFalse();
+        assertFalse(result);
     }
 }

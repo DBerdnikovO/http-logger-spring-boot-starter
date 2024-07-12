@@ -22,7 +22,6 @@ import static org.mockito.Mockito.*;
  * @project http-logger-spring-boot-starter
  */
 public class HttpLogFilterTest {
-
     @Mock
     private HttpLogDetails mockHttpLogDetails;
 
@@ -33,7 +32,7 @@ public class HttpLogFilterTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         httpLogFilter = new HttpLogFilter(mockHttpLogDetails, mockHttpExecutionTiming);
     }
 

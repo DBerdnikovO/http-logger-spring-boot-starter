@@ -40,7 +40,7 @@ public class LogHttpAspectTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         logHttpAspect = new LogHttpAspect(mockHttpLogDetails, mockHttpExecutionTiming);
     }
 
@@ -60,7 +60,6 @@ public class LogHttpAspectTest {
         Object actualResult = logHttpAspect.logRequestAndResponseAround(mockJoinPoint);
 
         verify(mockJoinPoint, times(1)).proceed();
-
         verify(mockHttpLogDetails, times(2)).logRequestAndResponseDetails(any(HttpServletRequest.class), any(HttpServletResponse.class));
 
         assertSame(expectedResult, actualResult);
