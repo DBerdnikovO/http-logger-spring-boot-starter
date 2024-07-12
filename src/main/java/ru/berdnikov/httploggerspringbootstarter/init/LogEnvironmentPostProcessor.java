@@ -31,8 +31,11 @@ public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
         boolean isEnabled = enabledProperty.isPresent();
 
-        if (!isEnabled) {
+        if(!isEnabled)
             throw new LogStartupException("Error property environment " + LogApplicationVariables.ENABLED);
+
+        if (!enabledProperty.get().equalsIgnoreCase("true") && !enabledProperty.get().equalsIgnoreCase("false")) {
+            throw new LogStartupException("Incorrect value in property environment " + LogApplicationVariables.ENABLED);
         }
 
         Map<String, Object> logProperties = new HashMap<>();
