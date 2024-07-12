@@ -14,7 +14,6 @@ import ru.berdnikov.httploggerspringbootstarter.utils.HttpHeaderAttribute;
  * @author danilaberdnikov on HttpHandlerInterceptor.
  * @project http-logger-spring-boot-starter
  */
-//+
 @Slf4j
 @RequiredArgsConstructor
 public class HttpHandlerInterceptor implements HandlerInterceptor {

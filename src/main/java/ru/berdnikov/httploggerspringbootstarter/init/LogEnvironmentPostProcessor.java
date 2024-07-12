@@ -18,7 +18,6 @@ import java.util.Optional;
  * @author danilaberdnikov on LogEnvironmentPostProcessor.
  * @project http-logger-spring-boot-starter
  */
-//+
 @Component
 public class LogEnvironmentPostProcessor implements EnvironmentPostProcessor {
     public static final String CUSTOM_PROPERTY_NAME = "customLogProperties";
