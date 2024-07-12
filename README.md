@@ -7,6 +7,15 @@
 | ------------- | ------------- |
 
 ## Быстрая настройка
+* Скачайте проект 
+```
+  https://github.com/DBerdnikovO/http-logger-spring-boot-starter.git
+```
+
+* Выполните команду
+```
+  mvn clean install
+```
 
 * Добавьте зависимость в maven проект:
 
